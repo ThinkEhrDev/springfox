@@ -101,7 +101,7 @@ ext {
 }
 
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.jfrog.bintray'
 apply plugin: "com.jfrog.artifactory"
 
 jar {
@@ -155,7 +155,7 @@ publishing {
 
 
 artifactory {
-  contextUrl = 'https://oss.jfrog.org'
+  contextUrl = 'http://artifactory.marand.si'
   resolve {
     repository {
       repoKey = 'libs-release'
@@ -164,7 +164,7 @@ artifactory {
   }
   publish {
     repository {
-      repoKey = 'oss-snapshot-local' //The Artifactory repository key to publish to
+      repoKey = 'libs-release-local' //The Artifactory repository key to publish to
       //when using oss.jfrog.org the credentials are from Bintray. For local build we expect them to be found in
       //~/.gradle/gradle.properties, otherwise to be set in the build server
       username = project.bintrayUser
@@ -176,37 +176,37 @@ artifactory {
   }
 }
 
-bintray {
-  user = project.bintrayUser
-  key = project.bintrayApiKey
-  dryRun = MultiProjectReleasePlugin.dryRun(project) //Whether to run this as dry-run, without deploying
-  publish = true //If version should be auto published after an upload
-  publications = ['mavenJava']
-  pkg {
-    repo = 'maven-repo'
-    name = "springfox"
-    userOrg = "springfox"
-    websiteUrl = "${project.projectUrl}"
-    issueTrackerUrl = "${project.projectUrl}/issues"
-    vcsUrl = "${project.projectUrl}.git"
-    desc = project.description
-    licenses = ['Apache-2.0']
-    labels = ['spring', 'swagger', 'apis', 'oas', 'openapi', 'springfox']
-    publicDownloadNumbers = true
-    version {
-      vcsTag = project.version
-      gpg {
-        sign = true //Determines whether to GPG sign the files. The default is false
-        //Optional. The passphrase for GPG signing'
-        passphrase = project.passphrase
-      }
-      mavenCentralSync {
-        sync = ("true" == project.shouldSyncWithMavenCentral)
-        user = project.sonatypeUser
-        password = project.sonatypePassword
-        close = '1'
-      }
-    }
-  }
-}
+//bintray {
+//  user = 'jenkins'
+//  key = 'jenkins'
+//  dryRun = MultiProjectReleasePlugin.dryRun(project) //Whether to run this as dry-run, without deploying
+//  publish = true //If version should be auto published after an upload
+//  publications = ['mavenJava']
+//  pkg {
+//    repo = 'maven-repo'
+//    name = "springfox"
+//    userOrg = "springfox"
+//    websiteUrl = "${project.projectUrl}"
+//    issueTrackerUrl = "${project.projectUrl}/issues"
+//    vcsUrl = "${project.projectUrl}.git"
+//    desc = project.description
+//    licenses = ['Apache-2.0']
+//    labels = ['spring', 'swagger', 'apis', 'oas', 'openapi', 'springfox']
+//    publicDownloadNumbers = true
+//    version {
+//      vcsTag = project.version
+//      gpg {
+//        sign = true //Determines whether to GPG sign the files. The default is false
+//        //Optional. The passphrase for GPG signing'
+//        passphrase = project.passphrase
+//      }
+//      mavenCentralSync {
+//        sync = ("true" == project.shouldSyncWithMavenCentral)
+//        user = project.sonatypeUser
+//        password = project.sonatypePassword
+//        close = '1'
+//      }
+//    }
+//  }
+//}
 
