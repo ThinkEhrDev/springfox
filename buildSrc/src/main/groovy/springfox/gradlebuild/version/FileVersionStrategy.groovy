@@ -23,7 +23,7 @@ class FileVersionStrategy implements VersioningStrategy, GitTaggingSupport, GitV
           major.toInteger(),
           minor.toInteger(),
           patch.toInteger(),
-          isReleaseBuild ? "" : buildNumberSuffix)
+          isReleaseBuild ? "-M3" : buildNumberSuffix)
     }
     version
   }

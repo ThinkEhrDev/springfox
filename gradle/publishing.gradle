@@ -167,8 +167,8 @@ artifactory {
       repoKey = 'libs-release-local' //The Artifactory repository key to publish to
       //when using oss.jfrog.org the credentials are from Bintray. For local build we expect them to be found in
       //~/.gradle/gradle.properties, otherwise to be set in the build server
-      username = project.bintrayUser
-      password = project.bintrayApiKey
+      username = 'jenkins'
+      password = 'jenkins'
     }
     defaults {
       publications('mavenJava')
